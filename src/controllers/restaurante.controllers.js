@@ -89,36 +89,7 @@ const obtenerRestaurante = async (req, res) => {
         return httpError(res, "ERROR_GET_UN_DATO-DE-Restaurante")
     }
 }
-//  METODO PARA OBTENER UNA VIDEO JUEGO  POR NOMBRE DE sector
-const obtenerRestauranteNombreMesa = async (req, res) => {
-    try {
-        const { name } = req.params;
-        const db = await database();
-        const sql = `
-        SELECT 
-                c.id_restaurante,
-                c.reserva,
-                c.descripcion,
-                c.borrar,
-                c.id_mesa
-            FROM restaurante c
-            INNER JOIN asiento s ON c.id_mesa = s.id_mesa
-        WHERE s.nombre like '${name}%'
 
-    `;
-       //EJECUTAMOS LA CONSULTA 
-       const [rows] = await db.query(sql);
-       res.json(
-           {
-               "ok": true,
-               data: rows
-           }
-       );
-    } catch (error) {
-        return httpError(res, "ERROR_GET_UN_SOLO_DATO-DE-Restaurante-BUSQUEDA-POR-PLATAFORMA-POR-NOMBRE")
-    }
-
-}
 //  METODO PARA EDITAR RESTAURANTE
 const editarRestaurante = async (req, res) => {
 
